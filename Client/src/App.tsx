@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import type { IProduct } from './models/IProduct';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function Header() {
 
 function ProductList() {
 
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:5037/api/products')
