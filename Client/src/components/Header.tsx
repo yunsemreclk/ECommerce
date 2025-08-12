@@ -1,5 +1,11 @@
+import { AppBar, Toolbar, Typography } from "@mui/material";
+
 export default function Header() {
     return (
-        <h1>E-Commerce App</h1>
-    )
+        <AppBar position="static" color="secondary">
+            <Toolbar>
+                <Typography variant="h6" >E-Commerce Store</Typography>
+            </Toolbar>
+        </AppBar>
+    );
 }
