@@ -1,5 +1,7 @@
+import { Grid } from "@mui/material";
 import type { IProduct } from "../models/IProduct";
 import Product from "./Product";
+
 
 interface Props {
     products: IProduct[];
@@ -7,11 +9,14 @@ interface Props {
 
 export default function ProductList({ products }: Props) {
     return (
-        <div>
-            <h2>Product List</h2>
-            {products.map((product: any) => (
-                <Product key={product.id} product={product} />
+
+        <Grid container spacing={2}>
+
+            {products.map((product: IProduct) => (
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={product.id}>
+                    <Product product={product} />
+                </Grid>
             ))}
-        </div>
+        </Grid>
     )
 }
