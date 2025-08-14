@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Middlewares;
 
 
 
@@ -18,6 +19,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandling>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
