@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
-import type { IProduct } from "../models/IProduct"
 import { AddShoppingCart, Search } from "@mui/icons-material"
+import type { IProduct } from "../../models/IProduct"
 
 interface Props {
     product: IProduct

@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import type { IProduct } from "../models/IProduct";
+import type { IProduct } from "../../models/IProduct";
 import Product from "./Product";
 
 
