@@ -27,7 +27,7 @@ export default function Header() {
                     <Typography variant="h6">E-Commerce Store</Typography>
                     <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', sm: 'flex' } }}>
                         {links.map(link => (
-                            <Button component={NavLink} to={link.to} sx={navStyle} >
+                            <Button key={link.to} component={NavLink} to={link.to} sx={navStyle} >
                                 {link.title}
                             </Button>
                         ))}
