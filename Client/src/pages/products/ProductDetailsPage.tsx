@@ -1,17 +1,17 @@
-import { CircularProgress, Divider, Grid, Table, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import { CircularProgress, Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import type { IProduct } from "../../models/IProduct";
+import requests from "../../api/request";
 
 export default function ProductDetailsPage() {
 
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
     const [product, setProduct] = useState<IProduct | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5037/api/products/${id}`)
-            .then(response => response.json())
+        id && requests.Catalog.getById(Number(id))
             .then(data => setProduct(data))
             .catch(error => console.log(error))
             .finally(() => setLoading(false));
@@ -34,18 +34,20 @@ export default function ProductDetailsPage() {
                 <Typography variant="h5" color="green">${product.price.toFixed(2)}</Typography>
                 <TableContainer>
                     <Table>
-                        <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>{product.name}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Description</TableCell>
-                            <TableCell>{product.description}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Stock</TableCell>
-                            <TableCell>{product.stock}</TableCell>
-                        </TableRow>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>{product.name}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>Description</TableCell>
+                                <TableCell>{product.description}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>Stock</TableCell>
+                                <TableCell>{product.stock}</TableCell>
+                            </TableRow>
+                        </TableBody>
                     </Table>
                 </TableContainer>
             </Grid>
