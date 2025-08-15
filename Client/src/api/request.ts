@@ -1,6 +1,22 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios, { AxiosError, type AxiosResponse } from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:5037/api/';
+
+axios.interceptors.response.use(response => {
+    return response;
+}, (error: AxiosError) => {
+    console.log("interceptor error...", error);
+    return Promise.reject(error.response);
+});
+
+axios.interceptors.request.use(request => {
+    console.log("interceptor request...", request);
+    return request;
+}, (error: AxiosError) => {
+    console.log("interceptor error...", error);
+    return Promise.reject(error);
+});
+
 
 const request = {
     get: (url: string) => axios.get(url).then((response: AxiosResponse) => response.data),
