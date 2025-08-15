@@ -1,11 +1,32 @@
 import axios, { AxiosError, type AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
+import { router } from '../router/Routes';
+
 
 axios.defaults.baseURL = 'http://localhost:5037/api/';
 
 axios.interceptors.response.use(response => {
     return response;
 }, (error: AxiosError) => {
-    console.log("interceptor error...", error);
+    const { data, status } = error.response as AxiosResponse;
+    switch (status) {
+        case 400:
+            toast.error(data.title);
+            break;
+        case 401:
+            toast.error(data.title);
+            break;
+        case 404:
+            toast.error("/not-found");
+            break;
+        case 500:
+            router.navigate('/server-error', { state: { error: data, status: status } });
+            break;
+        default:
+            toast.error('Something went wrong');
+            break;
+    }
+
     return Promise.reject(error.response);
 });
 
